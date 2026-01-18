@@ -1,0 +1,289 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0a0e27;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: #f8fafc;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 우주 별 배경 효과 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(2px 2px at 60px 70px, rgba(255, 255, 255, 0.2), transparent),
+    radial-gradient(1px 1px at 50px 50px, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 90px 90px, rgba(255, 255, 255, 0.25), transparent),
+    radial-gradient(2px 2px at 130px 40px, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 160px 80px, rgba(255, 255, 255, 0.2), transparent),
+    radial-gradient(2px 2px at 200px 30px, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(1px 1px at 240px 70px, rgba(255, 255, 255, 0.25), transparent);
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  animation: twinkle 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.header {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: #e2e8f0;
+  margin-bottom: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(148, 163, 184, 0.3);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #94a3b8;
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-style: italic;
+}
+
+.main {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-container {
+  width: 100%;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.gallery-item {
+  position: relative;
+  background: rgba(30, 41, 59, 0.6);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(148, 163, 184, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.4s ease,
+              border-color 0.4s ease;
+  cursor: pointer;
+  aspect-ratio: 1;
+  border: 1px solid rgba(148, 163, 184, 0.05);
+}
+
+.gallery-item:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(59, 130, 246, 0.3),
+    0 0 30px rgba(139, 92, 246, 0.2),
+    0 0 0 1px rgba(148, 163, 184, 0.2);
+  border-color: rgba(148, 163, 184, 0.3);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.95);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.05);
+}
+
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom, 
+    transparent 0%, 
+    rgba(15, 23, 42, 0.3) 100%
+  );
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover::after {
+  opacity: 0.5;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #cbd5e1;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.spinner {
+  border: 3px solid rgba(148, 163, 184, 0.2);
+  border-top: 3px solid #60a5fa;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+  box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 모달 스타일 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 14, 39, 0.95);
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.4s ease;
+}
+
+.modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  color: #cbd5e1;
+  font-size: 42px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.close:hover {
+  color: #fff;
+  background: rgba(59, 130, 246, 0.3);
+  transform: rotate(90deg);
+  box-shadow: 0 0 20px rgba(96, 165, 250, 0.4);
+}
+
+.modal-content {
+  max-width: 90%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  animation: zoomIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-caption {
+  color: #cbd5e1;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .main {
+    padding: 1rem;
+  }
+
+  .header {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
